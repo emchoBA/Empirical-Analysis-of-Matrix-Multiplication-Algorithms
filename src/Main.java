@@ -1,30 +1,34 @@
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
 
-        int[][] A = {
-                {1, 2, 3, 4, 5, 6, 7, 8},
-                {5, 6, 7, 8, 9, 10, 11, 12},
-                {9, 10, 11, 12, 13, 14, 15, 16},
-                {13, 14, 15, 16, 17, 18, 19, 20},
-                {21,22,23,24,25,26,27,28},
-                {29,30,31,32,33,34,35,36},
-                {37,38,39,40,41,42,43,44},
-                {45,46,47,48,49,50,51,52}
-        };
+        int size = 2;
 
-        int[][] B = {
-                {17, 18, 19, 20,21,22,23,24},
-                {21, 22, 23, 24,25,26,27,28},
-                {25, 26, 27, 28,29,30,31,32},
-                {29, 30, 31, 32,33,34,35,36},
-                {37,38,39,40,41,42,43,44},
-                {45,46,47,48,49,50,51,52},
-                {53,54,55,56,57,58,59,60},
-                {61,62,63,64,65,66,67,68}
-        };
+        int[][]A = generateRandomMatrix(size,size);
+        int[][]B = generateRandomMatrix(size,size);
 
 //        int[][] result = DivideAndConquerMultiply.DivideAndConquer(A,B);
-        int[][] result = BruteForceMutliply.bruteforceMultiply(A,B);
+//        int[][] result = BruteForceMutliply.bruteforceMultiply(A,B);
+        int[][] result = StrassensMultiply.strassenMultiply(A,B);
+
+        System.out.println("Matrix A:");
+        for (int[] ints : A) {
+            for (int j = 0; j < result[0].length; j++) {
+                System.out.print(ints[j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("***********");
+
+        System.out.println("Matrix B:");
+        for (int[] ints : B) {
+            for (int j = 0; j < result[0].length; j++) {
+                System.out.print(ints[j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("***********");
 
         System.out.println("Resultant Matrix:");
         for (int[] ints : result) {
@@ -33,5 +37,19 @@ public class Main {
             }
             System.out.println();
         }
+
+    }
+
+    private static int[][] generateRandomMatrix(int rows, int columns) {
+        int[][] matrix = new int[rows][columns];
+        Random random = new Random();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                matrix[i][j] = random.nextInt(99);
+            }
+        }
+
+        return matrix;
     }
 }
